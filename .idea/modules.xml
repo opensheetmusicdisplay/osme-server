@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/osme-server.iml" filepath="$PROJECT_DIR$/osme-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/osme-server.iml" filepath="$PROJECT_DIR$/.idea/osme-server.iml" />
     </modules>
   </component>
 </project>
