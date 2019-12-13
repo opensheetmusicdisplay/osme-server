@@ -1,16 +1,17 @@
+import {Fraction, MusicSheet, RhythmInstruction, RhythmSymbolEnum} from 'opensheetmusicdisplay';
+import {
+    DefaultInstrumentOptions,
+    DurationSettings,
+    ExampleSourceGenerator,
+    PitchSettings,
+    ScaleKey,
+    ScaleType,
+    SourceGeneratorOptions,
+    SourceGeneratorPlugin,
+    Tone,
+    XMLSourceExporter,
+} from 'osme';
 
-import {MusicSheet} from 'osme';
-import {Fraction} from 'osme';
-import {SourceGeneratorOptions} from 'osme';
-import {DefaultInstrumentOptions} from 'osme';
-import {PitchSettings} from 'osme';
-import {DurationSettings} from 'osme';
-import {SourceGeneratorPlugin} from 'osme';
-import {ExampleSourceGenerator} from 'osme';
-import {ScaleKey, ScaleType, Tone} from 'osme';
-import {RhythmSymbolEnum} from 'osme';
-import {RhythmInstruction} from 'opensheetmusicdisplay';
-import {XMLSourceExporter} from 'osme';
 export class GeneratorService {
 
     public generateExport(): string {
