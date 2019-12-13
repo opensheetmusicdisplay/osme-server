@@ -1,15 +1,16 @@
-import {ScaleKey, ScaleType, Tone} from 'osme/build/dist/src/OSME/Common';
-import {RhythmInstruction, RhythmSymbolEnum} from 'osme/build/dist/src/MusicalScore/VoiceData/Instructions';
-import {XMLSourceExporter} from 'osme/build/dist/src/OSME/SourceExporter/XMLSourceExporter';
-import {MusicSheet} from 'osme/build/dist/src/MusicalScore';
-import {Fraction} from 'osme/build/dist/src/Common/DataObjects';
-import {SourceGeneratorOptions} from 'osme/build/dist/src/OSME/SourceGenerator/SourceGeneratorParameters';
-import {DefaultInstrumentOptions} from 'osme/build/dist/src/OSME/SourceGenerator/SourceGeneratorParameters';
-import {PitchSettings} from 'osme/build/dist/src/OSME/SourceGenerator/SourceGeneratorParameters';
-import {DurationSettings} from 'osme/build/dist/src/OSME/SourceGenerator/SourceGeneratorParameters';
-import {SourceGeneratorPlugin} from 'osme/build/dist/src/OSME/SourceGenerator/SourceGeneratorPlugin';
-import {ExampleSourceGenerator} from 'osme/build/dist/src/OSME/SourceGenerator/ExampleSourceGenerator';
 
+import {MusicSheet} from 'osme';
+import {Fraction} from 'osme';
+import {SourceGeneratorOptions} from 'osme';
+import {DefaultInstrumentOptions} from 'osme';
+import {PitchSettings} from 'osme';
+import {DurationSettings} from 'osme';
+import {SourceGeneratorPlugin} from 'osme';
+import {ExampleSourceGenerator} from 'osme';
+import {ScaleKey, ScaleType, Tone} from 'osme';
+import {RhythmSymbolEnum} from 'osme';
+import {RhythmInstruction} from 'opensheetmusicdisplay';
+import {XMLSourceExporter} from 'osme';
 export class GeneratorService {
 
     public generateExport(): string {

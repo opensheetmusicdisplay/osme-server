@@ -1,5 +1,5 @@
 {
-  "name": "osme-server2",
+  "name": "osme-server",
   "version": "0.0.0",
   "scripts": {
     "build": "node ./util/build.js",
@@ -21,7 +21,8 @@
     "http-status-codes": "^1.4.0",
     "module-alias": "^2.2.2",
     "morgan": "^1.9.1",
-    "osme": "github:opensheetmusicdisplay/osme#develop",
+    "opensheetmusicdisplay": "github:opensheetmusicdisplay/opensheetmusicdisplay#feature/fix-module-exports",
+    "osme": "github:opensheetmusicdisplay/osme#feature/fix-module-exports",
     "winston": "^3.2.1"
   },
   "devDependencies": {
