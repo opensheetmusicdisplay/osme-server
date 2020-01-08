@@ -1,4 +1,12 @@
-import { Router } from 'express';
+const window = global;
+// @ts-ignore
+global.window = window;
+// @ts-ignore
+global.window.navigator = {
+    userAgent: 'node',
+};
+
+import {Router} from 'express';
 import Api1Router from './Api1';
 
 // Init router and path
