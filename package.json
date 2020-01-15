@@ -4,8 +4,8 @@
   "scripts": {
     "build-ts": "tsc --build tsconfig.prod.json",
     "build": "npm run build-ts",
-    "postinstall": "npm run build && npm run fixosmd",
-    "fixosmd": "rm -r node_modules/osme/node_modules/opensheetmusicdisplay",
+    "postinstall": "npm run fixdep && npm run build ",
+    "fixdep": "rm -r node_modules/osme/node_modules/opensheetmusicdisplay || echo OK",
     "lint": "tslint --project \"tsconfig.json\"",
     "start": "node dist/index.js",
     "start-ts": "ts-node src/index.ts",
