@@ -1,4 +1,4 @@
-/* tslint:disable:variable-name */
+/* tslint:disable:variable-name no-console */
 import {Fraction, MusicSheet, RhythmInstruction, RhythmSymbolEnum} from 'opensheetmusicdisplay';
 import {
     DefaultInstrumentOptions,
@@ -14,13 +14,24 @@ import {
 } from 'osme';
 import {GenerateRequest} from '../../routes/Api1';
 import {DistributionEntry} from 'osme/lib/OSME/Common/Distribution';
+import fs from 'fs';
+import ErrnoException = NodeJS.ErrnoException;
 
 export class GeneratorService {
+
+    private files: Set<string>;
+    private dirPrefix: string = '/tmp/';
+
+    constructor() {
+        this.files = new Set();
+    }
 
     public generateExport(request: GenerateRequest): string {
         const generatedSheet = this.generateWithRequest(request);
         const exporter = new XMLSourceExporter();
         const outputTxt = exporter.export(generatedSheet);
+
+        this.saveFile(outputTxt, generatedSheet.TitleString);
         return outputTxt.toString();
     }
 
@@ -156,4 +167,48 @@ export class GeneratorService {
         }
     }
 
+    private saveFile(outputTxt: string, title: string) {
+        const timestamp = Math.floor(Date.now() / 1000);
+        const path = timestamp + '.musicxml';
+        // @ts-ignore
+        fs.writeFile(this.dirPrefix + path, outputTxt, (err: ErrnoException) => {
+            if (err) {
+                // tslint:disable-next-line:no-console
+                return console.log(err);
+            }
+            // tslint:disable-next-line:no-console
+            console.log('The file was saved: ' + path);
+            this.files.add(path);
+            // tslint:disable-next-line:no-console
+            console.log(this.files);
+        });
+    }
+
+    public getFileList(prefix: string): Map<string, string> {
+        const urlMap: Map<string, string> = new Map();
+        this.files.forEach((key, value) => {
+            const url = prefix + key;
+            urlMap.set(key, url);
+        });
+
+        console.log(this.files);
+        console.log(urlMap);
+        return urlMap;
+    }
+
+    public getFileOutput(path: string): string {
+        const file = this.getFilePath(path);
+
+        const fileData = fs.readFileSync(file, {encoding: 'UTF-8'});
+        // tslint:disable-next-line:no-console
+        console.log('The file was returned: ' + path);
+        return fileData;
+    }
+
+    public getFilePath(path: string): string {
+        if (!this.files.has(path)) {
+            throw Error('File not found');
+        }
+        return this.dirPrefix + path;
+    }
 }
