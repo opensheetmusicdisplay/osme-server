@@ -1,8 +1,8 @@
 /* tslint:disable:variable-name */
-import {logger} from '@shared';
 import {Request, Response, Router} from 'express';
 import {BAD_REQUEST, OK} from 'http-status-codes';
 import {GeneratorService} from '../domain/services/GeneratorService';
+import {logger} from '../shared';
 
 // Init shared
 const router = Router();
