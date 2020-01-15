@@ -2,9 +2,13 @@
   "name": "osme-server",
   "version": "0.0.0",
   "scripts": {
-    "build": "node ./util/build.js",
+    "build": "npm run build-ts",
+    "build-ts": "tsc --build tsconfig.prod.json",
+    "postinstall": "npm run fixdep",
+    "fixdep": "rm -r node_modules/osme/node_modules/opensheetmusicdisplay || echo OK",
     "lint": "tslint --project \"tsconfig.json\"",
-    "start": "ts-node src/index.ts",
+    "start": "node dist/index.js",
+    "start-ts": "ts-node src/index.ts",
     "start:dev": "nodemon --config nodemon.json",
     "test": "nodemon --config nodemon.test.json"
   },
@@ -17,8 +21,8 @@
     "morgan": "^1.9.1",
     "opensheetmusicdisplay": "github:opensheetmusicdisplay/opensheetmusicdisplay#experiment/clean-vexflow",
     "osme": "github:opensheetmusicdisplay/osme#feature/fix-module-exports",
-    "winston": "^3.2.1",
-    "ts-node": "^8.6.2"
+    "tslib": "^1.10.0",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "@types/command-line-args": "^5.0.0",
