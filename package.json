@@ -2,9 +2,9 @@
   "name": "osme-server",
   "version": "0.0.0",
   "scripts": {
-    "build-ts": "tsc --build tsconfig.prod.json",
     "build": "npm run build-ts",
-    "postinstall": "npm run fixdep && npm run build ",
+    "build-ts": "tsc --build tsconfig.prod.json",
+    "postinstall": "npm run fixdep",
     "fixdep": "rm -r node_modules/osme/node_modules/opensheetmusicdisplay || echo OK",
     "lint": "tslint --project \"tsconfig.json\"",
     "start": "node dist/index.js",
