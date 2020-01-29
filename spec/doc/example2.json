@@ -1,0 +1,10 @@
+{
+  "measures": "Number of measures [16]",
+  "time": "Number of Unit for Time, e.g 4/x [4/4]",
+  "complexity": "Float between 0.0 and 1.0 to indicate complexity and difficulty [0.5]",
+  "tempo": "Tempo in BPM [145]",
+  "scale_tone": "Root tone of scale to be used [C]",
+  "scale_type": "Scale type of scale [MAJOR]",
+  "pitch_settings": "Array of pitch DistributionValue pairs [[$index, $freq]...] where $index ∈ [0,12] and $freq is float",
+  "duration_settings": "Array of duration DistributionValue pairs [[key, $freq]...] where $key ∈ ['1/32', '1/16', .. '1/1'] and $freq is float"
+}
