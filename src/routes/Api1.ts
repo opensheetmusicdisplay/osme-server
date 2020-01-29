@@ -1,4 +1,4 @@
-/* tslint:disable:variable-name */
+/* tslint:disable:variable-name no-console */
 import {Request, Response, Router} from 'express';
 import {BAD_REQUEST, OK} from 'http-status-codes';
 import {GeneratorService} from '../domain/services/GeneratorService';
@@ -8,6 +8,7 @@ import {logger} from '../shared';
 const router = Router();
 
 const generatorService = new GeneratorService();
+const contentTypeMusicXml = 'application/xml';
 
 export class GenerateRequest {
     public measures: number = 1;
@@ -23,8 +24,41 @@ export class GenerateRequest {
 router.post('/sheets/generate', async (req: Request, res: Response) => {
     try {
         const request = req.body as GenerateRequest;
-        const xmlBody: string = generatorService.generateExport(request);
-        return res.status(OK).send(xmlBody);
+        const xmlOutput: string = generatorService.generateExport(request);
+        return res.status(OK)
+            .contentType(contentTypeMusicXml)
+            .send(xmlOutput);
+    } catch (err) {
+        logger.error(err.message, err);
+        return res.status(BAD_REQUEST).json({
+            error: err.message,
+        });
+    }
+});
+
+router.get('/sheets/', async (req: Request, res: Response) => {
+    try {
+        const prefix = req.protocol + '://' + req.get('host') + req.originalUrl;
+        console.log('Request File List with prefix: ' + prefix);
+
+        const list: Map<string, string> = generatorService.getFileList(prefix);
+        return res.status(OK).send(JSON.stringify([...list]));
+    } catch (err) {
+        logger.error(err.message, err);
+        return res.status(BAD_REQUEST).json({
+            error: err.message,
+        });
+    }
+});
+
+router.get('/sheets/:id', async (req: Request, res: Response) => {
+    try {
+        console.log('Request MusicXML File: ' + req.params.id);
+        const xmlPath: string = generatorService.getFilePath(req.params.id);
+        // const xmlOutput: string = generatorService.getFileOutput(req.params.id);
+        return res.status(OK)
+            .contentType(contentTypeMusicXml)
+            .download(xmlPath);
     } catch (err) {
         logger.error(err.message, err);
         return res.status(BAD_REQUEST).json({
